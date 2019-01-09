@@ -1,0 +1,34 @@
+$color-dark-blue: #10314C;
+$color-kkbox-blue: #17b5da;
+$color-kkbox-background: #BDECF7;
+$color-kkbox-grey: #363636;
+$color-kkbox-dark-grey: #242424;
+$color-grey: #EEEEEE;
+$color-white: #ffffff;
+$color-ptt-black: #000000;
+$color-ptt-blue: #0C0A66;
+$color-ptt-yellow: #FFFF66;
+$color-ptt-grey: #111111;
+$pc:1200px;
+$phone:760px;
+
+@mixin response-media($query) {
+    @media all and (max-width: $query) {
+            @content;
+    }
+}
+.thumb_up {
+    color: #009900;
+}
+.thumb_down {
+    color: #FF0000;
+}
+.chat {
+    color: #000000;
+}
+.common {
+    color: $color-kkbox-grey;
+}
+.common_grey {
+    color: $color-grey;
+}
