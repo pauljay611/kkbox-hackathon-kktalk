@@ -3,6 +3,11 @@ var cors = require('cors');
 var app = express();
 var axios = require('axios');
 var bodyParser = require('body-parser');
+var history = require('connect-history-api-fallback');
+app.use(history({
+    verbose: true,
+    index: '/'
+}));
 app.use(cors());
 app.use(express.static(__dirname + '/public/'))
 // 解析 application/json
