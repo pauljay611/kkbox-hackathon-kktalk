@@ -24,7 +24,7 @@
               v-for="(item,index) in searchList[0].artists.data"
               :key="index"
               @click="chooseCategory(item, '歌手')"
-            >{{item.name}}</li>
+            >【{{item.name}}】</li>
           </ul>
           <p>歌曲</p>
           <ul class="p-0" v-if="searchList[0].tracks.data!=undefined">
@@ -33,7 +33,7 @@
               v-for="(item,index) in searchList[0].tracks.data"
               :key="index"
               @click="chooseCategory(item, '歌曲')"
-            >{{item.name}}</li>
+            >【{{item.name}}】【{{item.album.artist.name}}】</li>
           </ul>
           <p>專輯</p>
           <ul class="p-0" v-if="searchList[0].albums.data!=undefined">
@@ -42,7 +42,7 @@
               v-for="(item,index) in searchList[0].albums.data"
               :key="index"
               @click="chooseCategory(item, '專輯')"
-            >{{item.name}}</li>
+            >【{{item.name}}】【{{item.artist.name}}】</li>
           </ul>
         </div>
         <div class="post-title col-md-12 mt-3" v-if="disabled == 'disabled'">

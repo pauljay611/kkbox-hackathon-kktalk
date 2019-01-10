@@ -137,9 +137,10 @@ export default {
 @import "@/assets/css/base.scss";
 .mail {
   color: $color-white;
-  overflow: auto;
   .container {
     padding: 0 5%;
+    overflow: auto;
+    height: 78vh;
     .title p {
       line-height: 1.8em;
       font-size: 1.8em;
@@ -161,7 +162,7 @@ export default {
       }
       textarea {
         width: 100%;
-        height: 130px;
+        height: 180px;
         line-height: 1.6em;
         font-size: 1.6em;
         border: none;
@@ -171,7 +172,6 @@ export default {
     }
     .searchList {
       ul {
-        max-height: 350px;
         li {
           list-style: none;
           line-height: 1.6em;
