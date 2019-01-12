@@ -56,6 +56,7 @@
         </div>
       </div>
     </div>
+    <div class="col-md-12 mt-3 warning" v-if="articleContent==''">此文章不存在</div>
     <div class="commentBar col-md-12 text-center" v-if="articleContent!=''">
       <div class="commentBtn">
         <a href="javascript:void(0)" class="mr-3" data-toggle="modal" data-target="#commentModal">
@@ -68,9 +69,18 @@
         >
           <md-icon>mail</md-icon>
         </router-link>
+        <a
+          v-if="$store.state.profile.id==articleContent.author.id"
+          href="javascript:void(0)"
+          class="mr-3"
+          data-toggle="modal"
+          data-target="#deleteModal"
+        >
+          <md-icon>delete</md-icon>
+        </a>
       </div>
     </div>
-
+    <!-- comment modal -->
     <div
       class="modal fade"
       id="commentModal"
@@ -108,6 +118,33 @@
               class="btn btn-primary"
               data-dismiss="modal"
               @click="sendComment"
+            >確定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- delete modal -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">刪除文章</h5>
+          </div>
+          <div class="modal-body">確認刪除文章?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              @click="deleteArticle"
             >確定</button>
           </div>
         </div>
@@ -170,7 +207,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("articles/" + this.$route.params.id + "/comment")
+        .ref("test/articles/" + this.$route.params.id + "/comment")
         .push({
           type: this.commentType,
           content: this.comment,
@@ -183,7 +220,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("articles/" + this.$route.params.id)
+        .ref("test/articles/" + this.$route.params.id)
         .once("value")
         .then(function(snapshot) {
           vm.articleContent = snapshot.val();
@@ -194,11 +231,19 @@ export default {
       vm.commentContent = [];
       this.$firebase
         .database()
-        .ref("articles/" + this.$route.params.id + "/comment")
+        .ref("test/articles/" + this.$route.params.id + "/comment")
         .once("value")
         .then(function(snapshot) {
           vm.commentContent.push(snapshot.val());
         });
+    },
+    deleteArticle() {
+      var vm = this;
+      this.$firebase
+        .database()
+        .ref("test/articles/" + this.$route.params.id)
+        .remove();
+      this.$router.push("/articles");
     }
   },
   mounted() {
@@ -252,10 +297,10 @@ export default {
       line-height: 1.4em;
       font-size: 1.4em;
       height: 100%;
-      .main-content{
+      .main-content {
         max-width: 100%;
         word-break: break-all;
-        word-wrap:break-word; 
+        word-wrap: break-word;
       }
       .main-bottom {
         p {
@@ -278,6 +323,11 @@ export default {
         }
       }
     }
+  }
+  .warning {
+    color:$color-white;
+    line-height: 1.4em;
+    font-size: 1.4em;
   }
   .commentBar {
     color: $color-grey;

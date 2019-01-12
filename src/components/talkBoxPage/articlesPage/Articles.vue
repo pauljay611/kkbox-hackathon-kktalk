@@ -81,7 +81,7 @@ export default {
       vm.articlesList = [];
       this.$firebase
         .database()
-        .ref("articles")
+        .ref("test/articles")
         .once("value")
         .then(function(snapshot) {
           let articles = snapshot.val();
@@ -107,7 +107,7 @@ export default {
     this.$emit("handle",{url:'/articles',name:"所有文章"});
     this.$firebase
       .database()
-      .ref("articles")
+      .ref("test/articles")
       .once("value")
       .then(function(snapshot) {
         let articles = snapshot.val();

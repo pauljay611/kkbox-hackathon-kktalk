@@ -123,7 +123,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("mails/" + this.$route.params.id + "/comment")
+        .ref("test/mails/" + this.$route.params.id + "/comment")
         .push({
           type: this.commentType,
           content: this.comment,
@@ -137,7 +137,7 @@ export default {
       this.$firebase
         .database()
         .ref(
-          "users/" +
+          "test/users/" +
             this.$store.state.profile.id +
             "/mailbox/" +
             this.$route.params.id

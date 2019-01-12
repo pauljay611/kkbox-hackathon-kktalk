@@ -63,7 +63,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("users/" + this.$route.params.id)
+        .ref("test/users/" + this.$route.params.id)
         .once("value")
         .then(function(snapshot) {
           vm.user = snapshot.val();
@@ -74,7 +74,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("articles")
+        .ref("test/articles")
         .once("value")
         .then(function(snapshot) {
           let articles = snapshot.val();

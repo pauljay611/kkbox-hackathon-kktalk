@@ -95,7 +95,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("articles/" + this.$route.params.id)
+        .ref("test/articles/" + this.$route.params.id)
         .once("value")
         .then(function(snapshot) {
           vm.recipient = snapshot.val();
@@ -105,7 +105,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("users/" + vm.recipient.author.id + "/mailbox")
+        .ref("test/users/" + vm.recipient.author.id + "/mailbox")
         .push({
           title: vm.recipient.title,
           content: vm.content,
@@ -116,7 +116,7 @@ export default {
         });
       this.$firebase
         .database()
-        .ref("users/" + vm.$store.state.profile.id + "/mailbox")
+        .ref("test/users/" + vm.$store.state.profile.id + "/mailbox")
         .push({
           title: vm.recipient.title,
           content: vm.content,

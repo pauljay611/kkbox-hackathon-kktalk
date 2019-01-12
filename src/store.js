@@ -17,14 +17,14 @@ export default new Vuex.Store({
     SET_PROFILE(state, profile) {
       firebase
       .database()
-      .ref("users/" + profile.id)
+      .ref("test/users/" + profile.id)
       .once("value")
       .then(function(snapshot) {
         if(snapshot.val()==null){
           state.profile = profile;
           firebase
           .database()
-          .ref("users/" + profile.id)
+          .ref("test/users/" + profile.id)
           .set(profile);
         }else{
           state.profile = snapshot.val()

@@ -44,7 +44,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("users/" + this.$store.state.profile.id + "/mailbox")
+        .ref("test/users/" + this.$store.state.profile.id + "/mailbox")
         .once("value")
         .then(function(snapshot) {
           vm.mailList = snapshot.val();

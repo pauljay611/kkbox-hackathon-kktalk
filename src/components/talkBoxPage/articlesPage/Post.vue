@@ -132,7 +132,7 @@ export default {
       if (this.keyword != "" && this.title != "" && this.content != "") {
         this.$firebase
           .database()
-          .ref("articles")
+          .ref("test/articles")
           .push({
             categoryType: this.categoryType,
             author: this.$store.state.profile,
