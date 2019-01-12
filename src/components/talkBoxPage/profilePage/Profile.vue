@@ -82,7 +82,6 @@ export default {
             if (articles[item].author.id == vm.$route.params.id) {
               articles[item].id = item;
               vm.articlesList.push(articles[item]);
-              console.log(articles[item])
             }
           }
           
@@ -91,10 +90,11 @@ export default {
     }
   },
   mounted() {
-    this.$bus.$emit("active", {
-      url: "/profile/"+this.$route.params.id,
-      name: "個人文章"
-    });
+    // this.$bus.$emit("active", {
+    //   url: "/profile/"+this.$route.params.id,
+    //   name: "個人文章"
+    // });
+    this.$emit("handle",{url:this.$route.path,name:"個人文章"})
     this.getProfile();
     this.getArticles();
   }

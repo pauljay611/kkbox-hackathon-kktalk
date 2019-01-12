@@ -45,6 +45,7 @@ export default {
     this.init();
   },
   mounted() {
+    this.$emit("handle","");
     window.onbeforeunload = function(event) {
       event.preventDefault();
       event.returnValue = "Write something clever here..";

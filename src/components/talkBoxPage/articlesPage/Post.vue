@@ -119,7 +119,6 @@ export default {
         }
       );
       this.searchList.push(getSearchList.data);
-      console.log(getSearchList.data);
     },
     chooseCategory(category, type) {
       this.keyword = category.name;
@@ -128,7 +127,6 @@ export default {
       this.categoryType = type;
       this.disabled = "disabled";
       this.searchList = [];
-      console.log(category);
     },
     postArticle() {
       if (this.keyword != "" && this.title != "" && this.content != "") {
@@ -150,12 +148,6 @@ export default {
     }
   },
   mounted() {
-    this.$bus.$emit("active", {
-      post: true,
-      article: false,
-      profile: false
-    });
-    console.log(1);
   }
 };
 </script>

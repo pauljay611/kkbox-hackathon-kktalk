@@ -13,7 +13,9 @@
           </div>
           <div class="mail-main pl-2">
             <div class="mail-category">
-              <router-link :to="'/mailbox/'+index">【 {{item.categoryType}} 】【 {{item.category.name}} 】</router-link>
+              <router-link
+                :to="'/mailbox/'+index"
+              >【 {{item.categoryType}} 】【 {{item.category.name}} 】</router-link>
             </div>
             <div class="mail-title">
               <router-link :to="'/mailbox/'+index">{{item.title}}</router-link>
@@ -45,16 +47,16 @@ export default {
         .ref("users/" + this.$store.state.profile.id + "/mailbox")
         .once("value")
         .then(function(snapshot) {
-          console.log(snapshot.val());
           vm.mailList = snapshot.val();
         });
     }
   },
   mounted() {
-    this.$bus.$emit("active", {
-      url: "/mailbox",
-      name: "個人信箱"
-    });
+    // this.$bus.$emit("active", {
+    //   url: "/mailbox",
+    //   name: "個人信箱"
+    // });
+    this.$emit("handle", { url: "/mailbox", name: "個人信箱" });
     this.getMail();
   }
 };

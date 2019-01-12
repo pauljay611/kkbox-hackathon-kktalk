@@ -54,14 +54,12 @@ export default {
   },
   methods: {
     getMusic() {
-      console.log(this.data.access_token)
       this.$axios
         .get(
           "https://api.kkbox.com/v1.1/me",
           { headers: { Authorization: "Bearer " + this.data.access_token } }
         )
         .then(response => {
-          console.log(this.data.access_token)
         });
     },
     getAuth() {
@@ -71,7 +69,6 @@ export default {
   },
   mounted() {
     this.$axios.get("http://localhost:3000/token").then(response => {
-      console.log(response.data);
       this.data = response.data;
     }).then(()=>{
       this.getMusic();

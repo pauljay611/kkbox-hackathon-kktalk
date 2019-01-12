@@ -100,10 +100,11 @@ export default {
   mounted() {
     var vm = this;
     vm.articlesList = [];
-    this.$bus.$emit("active", {
-      url: "/articles",
-      name: "所有文章"
-    });
+    // this.$bus.$emit("active", {
+    //   url: "/articles",
+    //   name: "所有文章"
+    // });
+    this.$emit("handle",{url:'/articles',name:"所有文章"});
     this.$firebase
       .database()
       .ref("articles")

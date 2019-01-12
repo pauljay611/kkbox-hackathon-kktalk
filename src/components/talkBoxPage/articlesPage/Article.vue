@@ -186,7 +186,6 @@ export default {
         .ref("articles/" + this.$route.params.id)
         .once("value")
         .then(function(snapshot) {
-          console.log(snapshot.val());
           vm.articleContent = snapshot.val();
         });
     },
@@ -198,7 +197,6 @@ export default {
         .ref("articles/" + this.$route.params.id + "/comment")
         .once("value")
         .then(function(snapshot) {
-          console.log(snapshot.val());
           vm.commentContent.push(snapshot.val());
         });
     }

@@ -1,22 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from './views/Main.vue'
+// import Main from './views/Main.vue'
 import Redirect from './views/Redirect.vue'
 // import Login from './views/Login.vue'
+// import Home from './components/mainPage/Home.vue'
+// import Chat from './components/mainPage/Chat.vue'
+// import Explorer from './components/mainPage/Explorer.vue'
+
 import Talkbox from './views/Talkbox.vue'
-import Home from './components/mainPage/Home.vue'
-import Chat from './components/mainPage/Chat.vue'
-import Explorer from './components/mainPage/Explorer.vue'
-import PkkLogin from './components/talkBoxPage/Login.vue'
+import Login from './components/talkBoxPage/Login.vue'
 import Board from './components/talkBoxPage/Board.vue'
-import Post from './components/talkBoxPage/Post.vue'
-import MailPost from './components/talkBoxPage/MailPost.vue'
-import Articles from './components/talkBoxPage/Articles.vue'
-import Profile from './components/talkBoxPage/Profile.vue'
+
+import Profile from './components/talkBoxPage/profilePage/Profile.vue'
+
+import Post from './components/talkBoxPage/articlesPage/Post.vue'
+import Articles from './components/talkBoxPage/articlesPage/Articles.vue'
 import Article from './components/talkBoxPage/articlesPage/Article.vue'
+
+import MailPost from './components/talkBoxPage/mailPage/MailPost.vue'
 import Mailbox from './components/talkBoxPage/mailPage/Mailbox.vue'
 import Mail from './components/talkBoxPage/mailPage/Mail.vue'
-import Reply from './components/talkBoxPage/Reply.vue'
+import Reply from './components/talkBoxPage/mailPage/Reply.vue'
+
 // import * as Cookies from "js-cookie"
 import store from './store.js'
 Vue.use(Router)
@@ -25,26 +30,10 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/main',
-      name: 'main',
-      component: Main,
-      redirect: '/home',
-      children: [
-        { path: '/home', component: Home },
-        { path: '/chat', component: Chat },
-        { path: '/explorer', component: Explorer },
-      ]
-    },
-    {
       path: '/redirect',
       name: 'redirect',
       component: Redirect
     },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   component: Login
-    // },
     {
       path: '/',
       name: 'talk',
@@ -52,7 +41,7 @@ const router = new Router({
       redirect: '/board',
       children: [
         { path: '/board', component: Board },
-        { path: '/login', component: PkkLogin },
+        { path: '/login', component: Login },
         { path: '/post', component: Post },
         { path: '/mail/:id', component: MailPost },
         { path: '/mailbox', component: Mailbox },

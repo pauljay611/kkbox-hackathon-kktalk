@@ -54,14 +54,14 @@
                     <div class="header-title p-0">
                       <router-link to="/board">PKK實業坊</router-link>
                     </div>
-                    <div class="header-subtitle p-0" v-if="linkActive.url!=undefined">
-                      <router-link :to="linkActive.url">{{linkActive.name}}</router-link>
+                    <div class="header-subtitle p-0" v-if="title!=''">
+                      <router-link :to="title.url">{{title.name}}</router-link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <router-view></router-view>
+            <router-view :title="title" @handle="changeTitle"></router-view>
           </div>
         </div>
       </div>
@@ -77,6 +77,7 @@ export default {
       token: "",
       data: "",
       chatroom: "",
+      title: "",
       linkActive: { url: "/articles", name: "所有文章" }
     };
   },
@@ -84,13 +85,16 @@ export default {
     getAuth() {
       window.location.href =
         "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
+    },
+    changeTitle(title){
+      this.title = title
     }
   },
   created() {
     var vm = this;
-    this.$bus.$on("active", function(item) {
-      vm.linkActive = item;
-    });
+    // this.$bus.$on("active", function(item) {
+    //   vm.linkActive = item;
+    // });
   },
   beforeDestroy: function() {
     this.$bus.$off("active");

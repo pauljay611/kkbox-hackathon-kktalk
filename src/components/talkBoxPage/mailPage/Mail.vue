@@ -144,7 +144,6 @@ export default {
         )
         .once("value")
         .then(function(snapshot) {
-          console.log(vm.$store.state.profile.id);
           vm.mailContent = snapshot.val();
         });
     }
