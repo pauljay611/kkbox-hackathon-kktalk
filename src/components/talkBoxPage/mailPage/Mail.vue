@@ -120,7 +120,6 @@ export default {
   },
   methods: {
     sendComment() {
-      var vm = this;
       this.$firebase
         .database()
         .ref("test/mails/" + this.$route.params.id + "/comment")

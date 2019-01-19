@@ -91,7 +91,7 @@
   </div>
 </template>
 <script>
-import modal from "@/components/modal/Modal";
+// import modal from "@/components/modal/Modal";
 export default {
   name: "post",
   data() {
@@ -122,7 +122,7 @@ export default {
     },
     chooseCategory(category, type) {
       this.keyword = category.name;
-      if(type == '歌曲')category = category.album
+      if (type == "歌曲") category = category.album;
       this.category = category;
       this.categoryType = type;
       this.disabled = "disabled";
@@ -147,8 +147,7 @@ export default {
       }
     }
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 <style lang="scss" scoped>

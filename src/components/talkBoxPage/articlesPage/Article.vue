@@ -204,7 +204,6 @@ export default {
       }
     },
     sendComment() {
-      var vm = this;
       this.$firebase
         .database()
         .ref("test/articles/" + this.$route.params.id + "/comment")
@@ -238,7 +237,6 @@ export default {
         });
     },
     deleteArticle() {
-      var vm = this;
       this.$firebase
         .database()
         .ref("test/articles/" + this.$route.params.id)
@@ -325,7 +323,7 @@ export default {
     }
   }
   .warning {
-    color:$color-white;
+    color: $color-white;
     line-height: 1.4em;
     font-size: 1.4em;
   }

@@ -86,12 +86,12 @@ export default {
       window.location.href =
         "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
     },
-    changeTitle(title){
-      this.title = title
+    changeTitle(title) {
+      this.title = title;
     }
   },
   created() {
-    var vm = this;
+    // var vm = this;
     // this.$bus.$on("active", function(item) {
     //   vm.linkActive = item;
     // });

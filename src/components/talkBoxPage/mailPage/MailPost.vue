@@ -77,7 +77,7 @@
   </div>
 </template>
 <script>
-import modal from "@/components/modal/Modal";
+// import modal from "@/components/modal/Modal";
 export default {
   name: "mail",
   data() {

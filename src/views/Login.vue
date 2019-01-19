@@ -55,12 +55,10 @@ export default {
   methods: {
     getMusic() {
       this.$axios
-        .get(
-          "https://api.kkbox.com/v1.1/me",
-          { headers: { Authorization: "Bearer " + this.data.access_token } }
-        )
-        .then(response => {
-        });
+        .get("https://api.kkbox.com/v1.1/me", {
+          headers: { Authorization: "Bearer " + this.data.access_token }
+        })
+        .then(() => {});
     },
     getAuth() {
       window.location.href =
@@ -68,11 +66,14 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get("http://localhost:3000/token").then(response => {
-      this.data = response.data;
-    }).then(()=>{
-      this.getMusic();
-    });
+    this.$axios
+      .get("http://localhost:3000/token")
+      .then(response => {
+        this.data = response.data;
+      })
+      .then(() => {
+        this.getMusic();
+      });
   }
 };
 </script>
