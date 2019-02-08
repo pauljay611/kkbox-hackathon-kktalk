@@ -6,32 +6,32 @@
           <div class="logo">
             <div class="loginLogo d-flex align-items-center justify-content-center">
               <img
-                src="http://fakeimg.pl/100x100/"
-                class="img-fluid rounded"
-                alt="Responsive image"
-              >
+src="http://fakeimg.pl/100x100/"
+                   class="img-fluid rounded"
+                   alt="Responsive image"
+>
             </div>
           </div>
           <div class="form">
             <div class="inputBlock">
               <input
-                type="text"
-                placeholder="account"
-              >
+type="text"
+                     placeholder="account"
+>
             </div>
             <div class="inputBlock">
               <input
-                type="text"
-                placeholder="password"
-              >
+type="text"
+                     placeholder="password"
+>
             </div>
           </div>
           <div class="loginBottom">
             <a
-              href="javascript:void(0)"
-              class="btn btn-lg btn-login-normal"
-              @click="getAuth"
-            >
+href="javascript:void(0)"
+               class="btn btn-lg btn-login-normal"
+               @click="getAuth"
+>
               LOGIN
             </a>
           </div>
@@ -42,10 +42,10 @@
           </div>
           <div class="loginBottom">
             <a
-              href="javascript:void(0)"
-              class="btn btn-lg btn-login-kkbox"
-              @click="getAuth"
-            >
+href="javascript:void(0)"
+               class="btn btn-lg btn-login-kkbox"
+               @click="getAuth"
+>
               KKBOX LOGIN
             </a>
           </div>
@@ -69,21 +69,32 @@ export default {
     };
   },
   mounted() {
-    this.$axios.get("http://localhost:3000/token").then(response => {
-      this.data = response.data;
-    }).then(()=>{
-      this.getMusic();
-    });
+    this.$axios
+      .get("http://localhost:3000/token")
+      .then(response => {
+        this.data = response.data;
+      })
+      .then(() => {
+        this.getMusic();
+      });
+  },
+  mounted() {
+    this.$axios
+      .get("http://localhost:3000/token")
+      .then(response => {
+        this.data = response.data;
+      })
+      .then(() => {
+        this.getMusic();
+      });
   },
   methods: {
     getMusic() {
       this.$axios
-        .get(
-          "https://api.kkbox.com/v1.1/me",
-          { headers: { Authorization: "Bearer " + this.data.access_token } }
-        )
-        .then(response => {
-        });
+        .get("https://api.kkbox.com/v1.1/me", {
+          headers: { Authorization: "Bearer " + this.data.access_token }
+        })
+        .then(() => {});
     },
     getAuth() {
       window.location.href =

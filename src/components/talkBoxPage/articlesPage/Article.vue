@@ -300,7 +300,6 @@ export default {
       }
     },
     sendComment() {
-      var vm = this;
       this.$firebase
         .database()
         .ref("test/articles/" + this.$route.params.id + "/comment")
@@ -334,7 +333,6 @@ export default {
         });
     },
     deleteArticle() {
-      var vm = this;
       this.$firebase
         .database()
         .ref("test/articles/" + this.$route.params.id)

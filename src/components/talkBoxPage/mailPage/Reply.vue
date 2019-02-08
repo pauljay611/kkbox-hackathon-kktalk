@@ -109,7 +109,7 @@
   </div>
 </template>
 <script>
-import modal from "@/components/modal/Modal";
+// import modal from "@/components/modal/Modal";
 export default {
   name: "Mail",
   data() {
@@ -130,7 +130,12 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("test/users/" + this.$store.state.profile.id + "/mailbox/" + this.$route.params.id)
+        .ref(
+          "test/users/" +
+            this.$store.state.profile.id +
+            "/mailbox/" +
+            this.$route.params.id
+        )
         .once("value")
         .then(function(snapshot) {
           vm.recipient = snapshot.val();
@@ -138,13 +143,13 @@ export default {
     },
     sendMail() {
       var vm = this;
-      var reString = '(RE) '
-      if(vm.recipient.title.indexOf(('RE'))>=0)reString='';
+      var reString = "(RE) ";
+      if (vm.recipient.title.indexOf("RE") >= 0) reString = "";
       this.$firebase
         .database()
         .ref("test/users/" + vm.recipient.sender.id + "/mailbox")
         .push({
-          title: reString+vm.recipient.title,
+          title: reString + vm.recipient.title,
           content: vm.content,
           time: Date.now(),
           sender: vm.$store.state.profile,
@@ -155,7 +160,7 @@ export default {
         .database()
         .ref("test/users/" + vm.$store.state.profile.id + "/mailbox")
         .push({
-          title: reString+vm.recipient.title,
+          title: reString + vm.recipient.title,
           content: vm.content,
           time: Date.now(),
           sender: vm.$store.state.profile,

@@ -57,9 +57,9 @@
                       </router-link>
                     </div>
                     <div
-                      v-if="title!=''"
-                      class="header-subtitle p-0"
-                    >
+v-if="title!=''"
+                         class="header-subtitle p-0"
+>
                       <router-link :to="title.url">
                         {{ title.name }}
                       </router-link>
@@ -69,9 +69,9 @@
               </div>
             </div>
             <router-view
-              :title="title"
-              @handle="changeTitle"
-            />
+:title="title"
+                         @handle="changeTitle"
+/>
           </div>
         </div>
       </div>
@@ -92,22 +92,22 @@ export default {
     };
   },
   created() {
-    var vm = this;
+    // var vm = this;
     // this.$bus.$on("active", function(item) {
     //   vm.linkActive = item;
     // });
-  },
-  beforeDestroy: function() {
-    this.$bus.$off("active");
   },
   methods: {
     getAuth() {
       window.location.href =
         "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
     },
-    changeTitle(title){
-      this.title = title
+    changeTitle(title) {
+      this.title = title;
     }
+  },
+  beforeDestroy: function() {
+    this.$bus.$off("active");
   }
 };
 </script>
