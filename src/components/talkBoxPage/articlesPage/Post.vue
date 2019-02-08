@@ -3,85 +3,144 @@
     <div class="container">
       <div class="row">
         <div class="title col-md-12">
-          <p class="text-center m-0">發表文章</p>
+          <p class="text-center m-0">
+            發表文章
+          </p>
         </div>
         <div class="post-category col-md-12">
-          <p class="m-0">分類</p>
+          <p class="m-0">
+            分類
+          </p>
           <input
+            v-model="keyword"
             class="border rounded pl-3"
             type="text"
             placeholder="搜尋想討論的歌曲、專輯、歌手"
-            @keyup.enter="search"
-            v-model="keyword"
             :disabled="disabled"
+            @keyup.enter="search"
           >
         </div>
-        <div class="searchList col-md-12 mt-3" v-if="searchList.length > 0">
+        <div
+          v-if="searchList.length > 0"
+          class="searchList col-md-12 mt-3"
+        >
           <p>歌手</p>
-          <ul class="p-0" v-if="searchList[0].artists.data!=undefined">
+          <ul
+            v-if="searchList[0].artists.data!=undefined"
+            class="p-0"
+          >
             <li
-              class="pl-3 mt-1"
               v-for="(item,index) in searchList[0].artists.data"
               :key="index"
+              class="pl-3 mt-1"
               @click="chooseCategory(item, '歌手')"
-            >【{{item.name}}】</li>
+            >
+              【{{ item.name }}】
+            </li>
           </ul>
           <p>歌曲</p>
-          <ul class="p-0" v-if="searchList[0].tracks.data!=undefined">
+          <ul
+            v-if="searchList[0].tracks.data!=undefined"
+            class="p-0"
+          >
             <li
-              class="pl-3 mt-1"
               v-for="(item,index) in searchList[0].tracks.data"
               :key="index"
+              class="pl-3 mt-1"
               @click="chooseCategory(item, '歌曲')"
-            >【{{item.name}}】【{{item.album.artist.name}}】</li>
+            >
+              【{{ item.name }}】【{{ item.album.artist.name }}】
+            </li>
           </ul>
           <p>專輯</p>
-          <ul class="p-0" v-if="searchList[0].albums.data!=undefined">
+          <ul
+            v-if="searchList[0].albums.data!=undefined"
+            class="p-0"
+          >
             <li
-              class="pl-3 mt-1"
               v-for="(item,index) in searchList[0].albums.data"
               :key="index"
+              class="pl-3 mt-1"
               @click="chooseCategory(item, '專輯')"
-            >【{{item.name}}】【{{item.artist.name}}】</li>
+            >
+              【{{ item.name }}】【{{ item.artist.name }}】
+            </li>
           </ul>
         </div>
-        <div class="post-title col-md-12 mt-3" v-if="disabled == 'disabled'">
-          <p class="m-0">標題</p>
-          <input class="border rounded pl-3" type="text" placeholder="輸入標題" v-model="title">
+        <div
+          v-if="disabled == 'disabled'"
+          class="post-title col-md-12 mt-3"
+        >
+          <p class="m-0">
+            標題
+          </p>
+          <input
+            v-model="title"
+            class="border rounded pl-3"
+            type="text"
+            placeholder="輸入標題"
+          >
         </div>
-        <div class="post-content col-md-12 mt-3" v-if="disabled == 'disabled'">
-          <p class="m-0">內容</p>
+        <div
+          v-if="disabled == 'disabled'"
+          class="post-content col-md-12 mt-3"
+        >
+          <p class="m-0">
+            內容
+          </p>
           <textarea
+            v-model="content"
             class="border rounded pl-3 content"
             type="text"
             placeholder="輸入內容"
-            v-model="content"
-          ></textarea>
+          />
         </div>
-        <div class="post-send col-md-12 mt-2" v-if="disabled == 'disabled'">
-          <div class="send rounded text-center" data-toggle="modal" data-target="#postModal">
-            <a href="javascript:void(0)">發表</a>
+        <div
+          v-if="disabled == 'disabled'"
+          class="post-send col-md-12 mt-2"
+        >
+          <div
+            class="send rounded text-center"
+            data-toggle="modal"
+            data-target="#postModal"
+          >
+            <a href="javascript:void(0)">
+              發表
+            </a>
           </div>
         </div>
         <div
-          class="modal fade"
           id="postModal"
+          class="modal fade"
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div
+            class="modal-dialog modal-dialog-centered"
+            role="document"
+          >
             <div class="modal-content">
-              <div class="modal-body">確認發表文章?</div>
+              <div class="modal-body">
+                確認發表文章?
+              </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  取消
+                </button>
                 <button
                   type="button"
                   class="btn btn-primary"
                   data-dismiss="modal"
                   @click="postArticle"
-                >發表</button>
+                >
+                  發表
+                </button>
               </div>
             </div>
           </div>
@@ -93,7 +152,7 @@
 <script>
 import modal from "@/components/modal/Modal";
 export default {
-  name: "post",
+  name: "Post",
   data() {
     return {
       searchList: [],
@@ -104,6 +163,8 @@ export default {
       category: "",
       categoryType: ""
     };
+  },
+  mounted() {
   },
   methods: {
     async search() {
@@ -146,8 +207,6 @@ export default {
         alert("請填入標題與內容!");
       }
     }
-  },
-  mounted() {
   }
 };
 </script>

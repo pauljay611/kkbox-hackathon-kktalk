@@ -2,24 +2,44 @@
   <div class="home">
     <div class="header d-flex justify-content-between">
       <div class="header-search m-0 d-flex align-items-center">
-        <input type="text" placeholder="13245" class="border rounded">
+        <input
+          type="text"
+          placeholder="13245"
+          class="border rounded"
+        >
         <md-icon>search</md-icon>
       </div>
       <div class="header-profile d-flex justify-content-center align-items-center">
         <div class="profilePhoto">
-          <img src="http://fakeimg.pl/50x50/" class="img-fluid rounded-circle">
+          <img
+            src="http://fakeimg.pl/50x50/"
+            class="img-fluid rounded-circle"
+          >
         </div>
         <div class="profileUser">
-          <h4 class="mb-0">12345</h4>
-          <p class="mb-0">67891</p>
+          <h4 class="mb-0">
+            12345
+          </h4>
+          <p class="mb-0">
+            67891
+          </p>
         </div>
       </div>
     </div>
     <div class="content">
-      <div class="content-title">Recently Play</div>
+      <div class="content-title">
+        Recently Play
+      </div>
       <div class="cardList row">
-        <div class="cardList-item col-md-2" v-for="(item, index) in playList" :key="index">
-          <img src="http://fakeimg.pl/300x250/" class="img-fluid rounded">
+        <div
+          v-for="(item, index) in playList"
+          :key="index"
+          class="cardList-item col-md-2"
+        >
+          <img
+            src="http://fakeimg.pl/300x250/"
+            class="img-fluid rounded"
+          >
           <div class="cardTitle">
             <h4>12345</h4>
             <p>67891</p>
@@ -28,10 +48,19 @@
       </div>
     </div>
     <div class="content">
-      <div class="content-title">Recommend</div>
+      <div class="content-title">
+        Recommend
+      </div>
       <div class="cardList row">
-        <div class="cardList-item col-md-2" v-for="(item, index) in playList" :key="index">
-          <img src="http://fakeimg.pl/300x250/" class="img-fluid rounded">
+        <div
+          v-for="(item, index) in playList"
+          :key="index"
+          class="cardList-item col-md-2"
+        >
+          <img
+            src="http://fakeimg.pl/300x250/"
+            class="img-fluid rounded"
+          >
           <div class="cardTitle">
             <h4>12345</h4>
             <p>67891</p>
@@ -43,7 +72,7 @@
 </template>
 <script>
 export default {
-  name: "home",
+  name: "Home",
   data() {
     return {
       playList: [1, 2, 3, 4, 5]

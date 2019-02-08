@@ -24,6 +24,7 @@ import Reply from './components/talkBoxPage/mailPage/Reply.vue'
 
 // import * as Cookies from "js-cookie"
 import store from './store.js'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -57,14 +58,12 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // let token = Cookies.get('token')
   // store.commit('SET_TOKEN', token)
-  if (store.state.token != "123") {
+  if (store.state.token != '123') {
     next()
+  } else if (to.path != '/login' && to.path != '/redirect') {
+    next('/login')
   } else {
-    if (to.path != '/login' && to.path != '/redirect') {
-      next('/login')
-    } else {
-      next()
-    }
+    next()
   }
 })
 

@@ -2,27 +2,39 @@
   <div class="profile">
     <div class="container">
       <div class="row">
-        <div class="main col-md-12" v-if="user!=''">
+        <div
+          v-if="user!=''"
+          class="main col-md-12"
+        >
           <div class="profile-header">
             <div class="profile-photo text-center">
-              <img :src="user.images[0].url" alt class="img-fluid rounded">
+              <img
+                :src="user.images[0].url"
+                alt
+                class="img-fluid rounded"
+              >
             </div>
             <div class="profile-info">
               <ul>
                 <li>
-                  <a :href="user.url" target="_blank">{{user.name}}</a>
+                  <a
+                    :href="user.url"
+                    target="_blank"
+                  >
+                    {{ user.name }}
+                  </a>
                 </li>
                 <li>
-                  <span>{{user.description}}</span>
+                  <span>{{ user.description }}</span>
                 </li>
               </ul>
             </div>
           </div>
           <div class="profile-content">
             <div
-              class="articles-content col-md-12 mt-3 p-0 ml-3"
               v-for="(item, index) in articlesList"
               :key="index"
+              class="articles-content col-md-12 mt-3 p-0 ml-3"
             >
               <!-- <div
                 class="articles-number text-right p-0"
@@ -32,14 +44,25 @@
                 <div class="articles-category">
                   <router-link
                     :to="'/articles/'+item.id"
-                  >【 {{item.categoryType}} 】【 {{item.category.name}} 】</router-link>
+                  >
+                    【 {{ item.categoryType }} 】【 {{ item.category.name }} 】
+                  </router-link>
                 </div>
                 <div class="articles-title">
-                  <router-link :to="'/articles/'+item.id">{{item.title}}</router-link>
+                  <router-link :to="'/articles/'+item.id">
+                    {{ item.title }}
+                  </router-link>
                 </div>
                 <div class="articles-info pr-2">
-                  <a :href="item.author.url" target="_blank">{{item.author.name}}</a>
-                  <p class="date m-0">{{item.postTime | moment("MM/DD") }}</p>
+                  <a
+                    :href="item.author.url"
+                    target="_blank"
+                  >
+                    {{ item.author.name }}
+                  </a>
+                  <p class="date m-0">
+                    {{ item.postTime | moment("MM/DD") }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -51,12 +74,21 @@
 </template>
 <script>
 export default {
-  name: "profile",
+  name: "Profile",
   data() {
     return {
       user: "",
       articlesList: []
     };
+  },
+  mounted() {
+    // this.$bus.$emit("active", {
+    //   url: "/profile/"+this.$route.params.id,
+    //   name: "個人文章"
+    // });
+    this.$emit("handle",{url:this.$route.path,name:"個人文章"})
+    this.getProfile();
+    this.getArticles();
   },
   methods: {
     getProfile() {
@@ -88,15 +120,6 @@ export default {
         });
         
     }
-  },
-  mounted() {
-    // this.$bus.$emit("active", {
-    //   url: "/profile/"+this.$route.params.id,
-    //   name: "個人文章"
-    // });
-    this.$emit("handle",{url:this.$route.path,name:"個人文章"})
-    this.getProfile();
-    this.getArticles();
   }
 };
 </script>

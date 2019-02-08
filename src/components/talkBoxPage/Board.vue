@@ -5,22 +5,30 @@
         <div class="col-md-12 main">
           <div class="block m-2">
             <div class="block-btn">
-              <router-link to="/articles">進入看板</router-link>
+              <router-link to="/articles">
+                進入看板
+              </router-link>
             </div>
           </div>
           <div class="block m-2">
             <div class="block-btn">
-              <router-link to="/mailbox">個人信箱</router-link>
+              <router-link to="/mailbox">
+                個人信箱
+              </router-link>
             </div>
           </div>
           <div class="block m-2">
             <div class="block-btn">
-              <router-link :to="'/profile/'+$store.state.profile.id">個人文章</router-link>
+              <router-link :to="'/profile/'+$store.state.profile.id">
+                個人文章
+              </router-link>
             </div>
           </div>
           <div class="block m-2">
             <div class="block-btn">
-              <a href="/">登出</a>
+              <a href="/">
+                登出
+              </a>
             </div>
           </div>
         </div>
@@ -30,16 +38,11 @@
 </template>
 <script>
 export default {
-  name: "login",
+  name: "Login",
   data() {
     return {
       
     };
-  },
-  methods: {
-    init() {
-      this.$store.dispatch("getProfile");
-    }
   },
   created() {
     this.init();
@@ -50,6 +53,11 @@ export default {
       event.preventDefault();
       event.returnValue = "Write something clever here..";
     };
+  },
+  methods: {
+    init() {
+      this.$store.dispatch("getProfile");
+    }
   }
 };
 </script>

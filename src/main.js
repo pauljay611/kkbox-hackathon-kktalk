@@ -1,14 +1,9 @@
 import Vue from 'vue'
-import App from './App.vue'
 import axios from 'axios'
-import router from './router'
-import store from './store'
 import $ from 'jquery'
 import 'bootstrap'
 
-
 // import 'bootstrap/dist/js/bootstrap'
-import 'bootstrap';
 
 // import plugins individually - require exports-loader
 import 'bootstrap/js/dist/modal'
@@ -19,23 +14,27 @@ import 'bootstrap/scss/bootstrap.scss'
 
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
+
+import * as firebase from 'firebase'
+
+import vueMoment from 'vue-moment'
+import store from './store'
+import router from './router'
+import App from './App.vue'
+
 Vue.use(VueMaterial)
+const config = {
+  apiKey: 'AIzaSyAeBDVgFf35IpZhlaCytMldLXVNgCEOS8Y',
+  authDomain: 'kkbox-project.firebaseapp.com',
+  databaseURL: 'https://kkbox-project.firebaseio.com',
+  projectId: 'kkbox-project',
+  storageBucket: 'kkbox-project.appspot.com',
+  messagingSenderId: '646013785232'
+}
+firebase.initializeApp(config)
 
-import * as firebase from 'firebase';
-var config = {
-  apiKey: "AIzaSyAeBDVgFf35IpZhlaCytMldLXVNgCEOS8Y",
-  authDomain: "kkbox-project.firebaseapp.com",
-  databaseURL: "https://kkbox-project.firebaseio.com",
-  projectId: "kkbox-project",
-  storageBucket: "kkbox-project.appspot.com",
-  messagingSenderId: "646013785232"
-};
-firebase.initializeApp(config);
-
-Vue.prototype.$firebase = firebase;
-
-import vueMoment from 'vue-moment';
-Vue.use(vueMoment);
+Vue.prototype.$firebase = firebase
+Vue.use(vueMoment)
 // jquery
 global.$ = $
 Vue.prototype.$bus = new Vue()
@@ -43,7 +42,6 @@ Vue.prototype.$bus = new Vue()
 Vue.config.productionTip = false
 
 Vue.prototype.$axios = axios
-
 
 new Vue({
   router,

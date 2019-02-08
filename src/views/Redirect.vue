@@ -1,12 +1,14 @@
 <template>
-  <div class="redirect">{{data}}</div>
+  <div class="redirect">
+    {{ data }}
+  </div>
 </template>
 
 <script>
 import router from "@/router";
 
 export default {
-  name: "redirect",
+  name: "Redirect",
   data() {
     return {
       data: ""

@@ -52,16 +52,26 @@
                 <div class="row">
                   <div class="header-main col-lg-12">
                     <div class="header-title p-0">
-                      <router-link to="/board">PKK實業坊</router-link>
+                      <router-link to="/board">
+                        PKK實業坊
+                      </router-link>
                     </div>
-                    <div class="header-subtitle p-0" v-if="title!=''">
-                      <router-link :to="title.url">{{title.name}}</router-link>
+                    <div
+                      v-if="title!=''"
+                      class="header-subtitle p-0"
+                    >
+                      <router-link :to="title.url">
+                        {{ title.name }}
+                      </router-link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <router-view :title="title" @handle="changeTitle"></router-view>
+            <router-view
+              :title="title"
+              @handle="changeTitle"
+            />
           </div>
         </div>
       </div>
@@ -71,7 +81,7 @@
 
 <script>
 export default {
-  name: "talkbox",
+  name: "Talkbox",
   data() {
     return {
       token: "",
@@ -81,15 +91,6 @@ export default {
       linkActive: { url: "/articles", name: "所有文章" }
     };
   },
-  methods: {
-    getAuth() {
-      window.location.href =
-        "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
-    },
-    changeTitle(title){
-      this.title = title
-    }
-  },
   created() {
     var vm = this;
     // this.$bus.$on("active", function(item) {
@@ -98,6 +99,15 @@ export default {
   },
   beforeDestroy: function() {
     this.$bus.$off("active");
+  },
+  methods: {
+    getAuth() {
+      window.location.href =
+        "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
+    },
+    changeTitle(title){
+      this.title = title
+    }
   }
 };
 </script>

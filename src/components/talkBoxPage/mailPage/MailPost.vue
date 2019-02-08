@@ -1,73 +1,105 @@
 <template>
   <div class="mail">
     <div class="container">
-      <div class="row" v-if="recipient!=''">
+      <div
+        v-if="recipient!=''"
+        class="row"
+      >
         <div class="title col-md-12">
-          <p class="text-center m-0">回應至作者信箱</p>
+          <p class="text-center m-0">
+            回應至作者信箱
+          </p>
         </div>
         <div class="recipient col-md-12">
-          <p class="m-0">收件者</p>
+          <p class="m-0">
+            收件者
+          </p>
           <input
+            v-model="recipient.author.name"
             class="border rounded pl-3"
             type="text"
             placeholder="作者"
-            v-model="recipient.author.name"
             disabled="disabled"
           >
         </div>
         <div class="mail-category col-md-12 mt-3">
-          <p class="m-0">分類</p>
+          <p class="m-0">
+            分類
+          </p>
           <input
+            v-model="recipient.category.name"
             class="border rounded pl-3"
             type="text"
             placeholder="輸入分類"
             disabled="disabled"
-            v-model="recipient.category.name"
           >
         </div>
         <div class="mail-title col-md-12 mt-3">
-          <p class="m-0">標題</p>
+          <p class="m-0">
+            標題
+          </p>
           <input
+            v-model="recipient.title"
             class="border rounded pl-3"
             type="text"
             placeholder="輸入標題"
             disabled="disabled"
-            v-model="recipient.title"
           >
         </div>
         <div class="mail-content col-md-12 mt-3">
-          <p class="m-0">內容</p>
+          <p class="m-0">
+            內容
+          </p>
           <textarea
+            v-model="content"
             class="border rounded pl-3 content"
             type="text"
             placeholder="輸入內容"
-            v-model="content"
-          ></textarea>
+          />
         </div>
         <div class="mail-send col-md-12 mt-2">
-          <div class="send rounded text-center" data-toggle="modal" data-target="#mailModal">
-            <a href="javascript:void(0)">發送</a>
+          <div
+            class="send rounded text-center"
+            data-toggle="modal"
+            data-target="#mailModal"
+          >
+            <a href="javascript:void(0)">
+              發送
+            </a>
           </div>
         </div>
         <div
-          class="modal fade"
           id="mailModal"
+          class="modal fade"
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered" role="document">
+          <div
+            class="modal-dialog modal-dialog-centered"
+            role="document"
+          >
             <div class="modal-content">
-              <div class="modal-body">確認發送訊息?</div>
+              <div class="modal-body">
+                確認發送訊息?
+              </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                 <button
                   type="button"
-                  @click="sendMail"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  取消
+                </button>
+                <button
+                  type="button"
                   class="btn btn-primary"
                   data-dismiss="modal"
-                >發送</button>
+                  @click="sendMail"
+                >
+                  發送
+                </button>
               </div>
             </div>
           </div>
@@ -79,7 +111,7 @@
 <script>
 import modal from "@/components/modal/Modal";
 export default {
-  name: "mail",
+  name: "Mail",
   data() {
     return {
       searchList: [],
@@ -89,6 +121,9 @@ export default {
       content: "",
       category: ""
     };
+  },
+  mounted() {
+    this.getArticle();
   },
   methods: {
     getArticle() {
@@ -127,9 +162,6 @@ export default {
         });
       this.$router.push("/mailbox");
     }
-  },
-  mounted() {
-    this.getArticle();
   }
 };
 </script>

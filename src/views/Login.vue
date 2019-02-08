@@ -14,29 +14,45 @@
           </div>
           <div class="form">
             <div class="inputBlock">
-              <input type="text" placeholder="account">
+              <input
+                type="text"
+                placeholder="account"
+              >
             </div>
             <div class="inputBlock">
-              <input type="text" placeholder="password">
+              <input
+                type="text"
+                placeholder="password"
+              >
             </div>
           </div>
           <div class="loginBottom">
-            <a href="javascript:void(0)" class="btn btn-lg btn-login-normal" @click="getAuth">LOGIN</a>
+            <a
+              href="javascript:void(0)"
+              class="btn btn-lg btn-login-normal"
+              @click="getAuth"
+            >
+              LOGIN
+            </a>
           </div>
           <div class="seperate">
-            <div class="seperateLine">or</div>
+            <div class="seperateLine">
+              or
+            </div>
           </div>
           <div class="loginBottom">
             <a
               href="javascript:void(0)"
               class="btn btn-lg btn-login-kkbox"
               @click="getAuth"
-            >KKBOX LOGIN</a>
+            >
+              KKBOX LOGIN
+            </a>
           </div>
         </div>
         <div class="col-md-6 text-center content-form">
           <h1>PAIRBOX</h1>
-          <div class="intro border text-left"></div>
+          <div class="intro border text-left" />
         </div>
       </div>
     </div>
@@ -52,6 +68,13 @@ export default {
       auth: ""
     };
   },
+  mounted() {
+    this.$axios.get("http://localhost:3000/token").then(response => {
+      this.data = response.data;
+    }).then(()=>{
+      this.getMusic();
+    });
+  },
   methods: {
     getMusic() {
       this.$axios
@@ -66,13 +89,6 @@ export default {
       window.location.href =
         "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
     }
-  },
-  mounted() {
-    this.$axios.get("http://localhost:3000/token").then(response => {
-      this.data = response.data;
-    }).then(()=>{
-      this.getMusic();
-    });
   }
 };
 </script>

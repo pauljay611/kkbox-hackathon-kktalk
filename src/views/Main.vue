@@ -1,9 +1,9 @@
 <template>
   <div class="mainPage">
     <div class="row">
-      <sidebar></sidebar>
+      <sidebar />
       <div class="wrap col-md-10">
-        <router-view></router-view>
+        <router-view />
       </div>
     </div>
   </div>
@@ -13,7 +13,7 @@
 import { mapState } from "vuex";
 import sidebar from "@/components/Sidebar.vue";
 export default {
-  name: "mainPage",
+  name: "MainPage",
   components: {
     sidebar
   },

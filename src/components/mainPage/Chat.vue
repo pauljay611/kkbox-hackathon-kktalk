@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: "chat",
+  name: "Chat",
   data() {
     return {
       playList: [1, 2, 3, 4, 5]

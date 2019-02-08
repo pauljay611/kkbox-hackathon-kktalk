@@ -1,31 +1,49 @@
 <template>
   <div class="articles">
     <div class="container">
-      <div class="row" v-if="articlesList.length>0">
+      <div
+        v-if="articlesList.length>0"
+        class="row"
+      >
         <div class="searchInput col-md-12 mt-3 pl-3">
-          <input type="text" placeholder="搜尋文章..." v-model="keyword" @keyup.enter="search">
+          <input
+            v-model="keyword"
+            type="text"
+            placeholder="搜尋文章..."
+            @keyup.enter="search"
+          >
         </div>
         <div
-          class="articles-content col-md-12 mt-3 p-0"
           v-for="(item, index) in articlesList"
           :key="index"
+          class="articles-content col-md-12 mt-3 p-0"
         >
           <div
             class="articles-number text-right p-0"
             :class="commentCount(item.comment).color"
-          >{{commentCount(item.comment).number}}</div>
+          >
+            {{ commentCount(item.comment).number }}
+          </div>
           <div class="articles-main pl-2">
             <div class="articles-category">
               <router-link
                 :to="'/articles/'+item.id"
-              >【 {{item.categoryType}} 】【 {{item.category.name}} 】</router-link>
+              >
+                【 {{ item.categoryType }} 】【 {{ item.category.name }} 】
+              </router-link>
             </div>
             <div class="articles-title">
-              <router-link :to="'/articles/'+item.id">{{item.title}}</router-link>
+              <router-link :to="'/articles/'+item.id">
+                {{ item.title }}
+              </router-link>
             </div>
             <div class="articles-info pr-2">
-              <router-link :to="'/profile/'+item.author.id">{{item.author.name}}</router-link>
-              <p class="date m-0">{{item.postTime | moment("MM/DD") }}</p>
+              <router-link :to="'/profile/'+item.author.id">
+                {{ item.author.name }}
+              </router-link>
+              <p class="date m-0">
+                {{ item.postTime | moment("MM/DD") }}
+              </p>
             </div>
           </div>
         </div>
@@ -42,12 +60,32 @@
 </template>
 <script>
 export default {
-  name: "articles",
+  name: "Articles",
   data() {
     return {
       articlesList: [],
       keyword: ""
     };
+  },
+  mounted() {
+    var vm = this;
+    vm.articlesList = [];
+    // this.$bus.$emit("active", {
+    //   url: "/articles",
+    //   name: "所有文章"
+    // });
+    this.$emit("handle",{url:'/articles',name:"所有文章"});
+    this.$firebase
+      .database()
+      .ref("test/articles")
+      .once("value")
+      .then(function(snapshot) {
+        let articles = snapshot.val();
+        for (let item in articles) {
+          articles[item].id = item;
+          vm.articlesList.push(articles[item]);
+        }
+      });
   },
   methods: {
     commentCount(comment) {
@@ -96,26 +134,6 @@ export default {
           }
         });
     }
-  },
-  mounted() {
-    var vm = this;
-    vm.articlesList = [];
-    // this.$bus.$emit("active", {
-    //   url: "/articles",
-    //   name: "所有文章"
-    // });
-    this.$emit("handle",{url:'/articles',name:"所有文章"});
-    this.$firebase
-      .database()
-      .ref("test/articles")
-      .once("value")
-      .then(function(snapshot) {
-        let articles = snapshot.val();
-        for (let item in articles) {
-          articles[item].id = item;
-          vm.articlesList.push(articles[item]);
-        }
-      });
   }
 };
 </script>

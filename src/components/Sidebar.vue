@@ -3,28 +3,46 @@
     <div class="sidebar-logo text-center m-3">
       <img
         src="http://fakeimg.pl/100x100/"
-        @click="change"
         class="img-fluid rounded-circle"
         alt="Responsive image"
+        @click="change"
       >
     </div>
     <div class="sidebar-nav">
       <ul>
         <li>
-          <router-link to="/explorer" class="nav-item" :class="{ 'active': linkActive.explorer}">
-            <md-icon class="mr-1">search</md-icon>
+          <router-link
+            to="/explorer"
+            class="nav-item"
+            :class="{ 'active': linkActive.explorer}"
+          >
+            <md-icon class="mr-1">
+              search
+            </md-icon>
             <span>Explorer</span>
           </router-link>
         </li>
         <li>
-          <router-link to="/home" class="nav-item" :class="{ 'active': linkActive.home}">
-            <md-icon class="mr-1">home</md-icon>
+          <router-link
+            to="/home"
+            class="nav-item"
+            :class="{ 'active': linkActive.home}"
+          >
+            <md-icon class="mr-1">
+              home
+            </md-icon>
             <span>Home page</span>
           </router-link>
         </li>
         <li>
-          <router-link to="/chat" class="nav-item" :class="{ 'active': linkActive.chat}">
-            <md-icon class="mr-1">chat</md-icon>
+          <router-link
+            to="/chat"
+            class="nav-item"
+            :class="{ 'active': linkActive.chat}"
+          >
+            <md-icon class="mr-1">
+              chat
+            </md-icon>
             <span>Chat</span>
           </router-link>
         </li>
@@ -41,11 +59,6 @@ export default {
       linkActive: {}
     };
   },
-  methods: {
-    change(item) {
-      this.linkActive = item;
-    }
-  },
   mounted() {
     var vm = this;
     this.$bus.$on("active", function(item) {
@@ -54,6 +67,11 @@ export default {
   },
   beforeDestroy: function() {
     this.$bus.$off("active");
+  },
+  methods: {
+    change(item) {
+      this.linkActive = item;
+    }
   }
 };
 </script>

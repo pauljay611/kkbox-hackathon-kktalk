@@ -1,71 +1,124 @@
 <template>
   <div class="articlePage">
-    <div class="container" v-if="articleContent!=''">
+    <div
+      v-if="articleContent!=''"
+      class="container"
+    >
       <div class="row">
         <div class="col-md-12 header mt-3">
           <div class="header-author">
-            <div class="title">作者</div>
+            <div class="title">
+              作者
+            </div>
             <div class="content">
-              <router-link :to="'/profile/'+articleContent.author.id">{{articleContent.author.name}}</router-link>
+              <router-link :to="'/profile/'+articleContent.author.id">
+                {{ articleContent.author.name }}
+              </router-link>
             </div>
           </div>
           <div class="header-category">
-            <div class="title">分類</div>
+            <div class="title">
+              分類
+            </div>
             <div class="content">
               <a
                 :href="articleContent.category.url"
                 target="_blank"
-              >【 歌手 】【 {{articleContent.category.name}} 】</a>
+              >
+                【 歌手 】【 {{ articleContent.category.name }} 】
+              </a>
             </div>
           </div>
           <div class="header-title">
-            <div class="title">標題</div>
-            <div class="content">{{articleContent.title}}</div>
+            <div class="title">
+              標題
+            </div>
+            <div class="content">
+              {{ articleContent.title }}
+            </div>
           </div>
           <div class="header-time">
-            <div class="title">時間</div>
-            <div
-              class="content"
-            >{{articleContent.postTime | moment("ddd MMM D &nbsp; HH:mm:ss YYYY")}}</div>
+            <div class="title">
+              時間
+            </div>
+            <div class="content">
+              {{ articleContent.postTime | moment("ddd MMM D &nbsp; HH:mm:ss YYYY") }}
+            </div>
           </div>
         </div>
         <div class="main col-md-12 mt-3">
           <div class="main-header mb-2">
-            <a :href="articleContent.category.url" target="_blank">
-              <img class="img-fluid" :src="articleContent.category.images[0].url" alt>
+            <a
+              :href="articleContent.category.url"
+              target="_blank"
+            >
+              <img
+                class="img-fluid"
+                :src="articleContent.category.images[0].url"
+                alt
+              >
             </a>
           </div>
-          <div class="main-content" v-html="articleContent.content"></div>
+          <div
+            class="main-content"
+            v-text="articleContent.content"
+          />
           <div class="main-bottom">
             <span>--</span>
             <p>※ 發信站: KK實業坊(pkk.cc)</p>
-            <p>※ 文章網址: {{"http://localhost:8080"+$route.path}}</p>
+            <p>※ 文章網址: {{ "http://localhost:8080"+$route.path }}</p>
           </div>
           <div v-if="commentContent!=''">
-            <div class="main-comment" v-for="(item, index) in commentContent[0]" :key="index">
+            <div
+              v-for="(item, index) in commentContent[0]"
+              :key="index"
+              class="main-comment"
+            >
               <div class="emoji pr-2">
-                <md-icon :class="item.type">{{item.type}}</md-icon>
+                <md-icon :class="item.type">
+                  {{ item.type }}
+                </md-icon>
               </div>
               <div class="name pr-2">
-                <a :href="item.name.url" target="_blank">{{item.name.name}}</a>
-                : {{item.content}}
+                <a
+                  :href="item.name.url"
+                  target="_blank"
+                >
+                  {{ item.name.name }}
+                </a>
+                : {{ item.content }}
               </div>
-              <div class="time">{{item.time | moment("MM/DD HH:mm")}}</div>
+              <div class="time">
+                {{ item.time | moment("MM/DD HH:mm") }}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-12 mt-3 warning" v-if="articleContent==''">此文章不存在</div>
-    <div class="commentBar col-md-12 text-center" v-if="articleContent!=''">
+    <div
+      v-if="articleContent==''"
+      class="col-md-12 mt-3 warning"
+    >
+      此文章不存在
+    </div>
+    <div
+      v-if="articleContent!=''"
+      class="commentBar col-md-12 text-center"
+    >
       <div class="commentBtn">
-        <a href="javascript:void(0)" class="mr-3" data-toggle="modal" data-target="#commentModal">
+        <a
+          href="javascript:void(0)"
+          class="mr-3"
+          data-toggle="modal"
+          data-target="#commentModal"
+        >
           <md-icon>chat</md-icon>
         </a>
         <router-link
+          v-if="$store.state.profile.id!=articleContent.author.id"
           class="ml-3"
           :to="'/mail/'+$route.params.id"
-          v-if="$store.state.profile.id!=articleContent.author.id"
         >
           <md-icon>mail</md-icon>
         </router-link>
@@ -82,70 +135,109 @@
     </div>
     <!-- comment modal -->
     <div
-      class="modal fade"
       id="commentModal"
+      class="modal fade"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div
+        class="modal-dialog modal-dialog-centered"
+        role="document"
+      >
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">發表推文</h5>
+            <h5 class="modal-title">
+              發表推文
+            </h5>
           </div>
           <div class="modal-body">
             <div class="emoji">
-              <p class="word">{{commentWord}}</p>
+              <p class="word">
+                {{ commentWord }}
+              </p>
               <div class="icon">
                 <span @click="changeComment('thumb_up')">
-                  <md-icon :class="active.up">thumb_up</md-icon>
+                  <md-icon :class="active.up">
+                    thumb_up
+                  </md-icon>
                 </span>
                 <span @click="changeComment('thumb_down')">
-                  <md-icon :class="active.down">thumb_down</md-icon>
+                  <md-icon :class="active.down">
+                    thumb_down
+                  </md-icon>
                 </span>
                 <span @click="changeComment('chat')">
-                  <md-icon :class="active.chat">chat</md-icon>
+                  <md-icon :class="active.chat">
+                    chat
+                  </md-icon>
                 </span>
               </div>
             </div>
-            <input type="text" v-model="comment">
+            <input
+              v-model="comment"
+              type="text"
+            >
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              取消
+            </button>
             <button
               type="button"
               class="btn btn-primary"
               data-dismiss="modal"
               @click="sendComment"
-            >確定</button>
+            >
+              確定
+            </button>
           </div>
         </div>
       </div>
     </div>
     <!-- delete modal -->
     <div
-      class="modal fade"
       id="deleteModal"
+      class="modal fade"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div
+        class="modal-dialog modal-dialog-centered"
+        role="document"
+      >
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">刪除文章</h5>
+            <h5 class="modal-title">
+              刪除文章
+            </h5>
           </div>
-          <div class="modal-body">確認刪除文章?</div>
+          <div class="modal-body">
+            確認刪除文章?
+          </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              取消
+            </button>
             <button
               type="button"
               class="btn btn-primary"
               data-dismiss="modal"
               @click="deleteArticle"
-            >確定</button>
+            >
+              確定
+            </button>
           </div>
         </div>
       </div>
@@ -154,7 +246,7 @@
 </template>
 <script>
 export default {
-  name: "articlePage",
+  name: "ArticlePage",
   data() {
     return {
       articleContent: "",
@@ -170,6 +262,10 @@ export default {
       comment: "",
       commentContent: []
     };
+  },
+  mounted() {
+    this.getArticle();
+    this.getComment();
   },
   methods: {
     changeComment(emoji) {
@@ -245,10 +341,6 @@ export default {
         .remove();
       this.$router.push("/articles");
     }
-  },
-  mounted() {
-    this.getArticle();
-    this.getComment();
   }
 };
 </script>
@@ -325,7 +417,7 @@ export default {
     }
   }
   .warning {
-    color:$color-white;
+    color: $color-white;
     line-height: 1.4em;
     font-size: 1.4em;
   }

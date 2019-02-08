@@ -14,13 +14,13 @@ module.exports = {
           '^/token': ''
         }
       }
-    },
+    }
   },
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
+        $: 'jquery',
+        jQuery: 'jquery'
       })
     ]
   }

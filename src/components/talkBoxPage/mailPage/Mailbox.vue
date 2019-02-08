@@ -1,28 +1,52 @@
 <template>
   <div class="mailbox">
     <div class="container">
-      <div class="row" v-if="mailList!=''">
+      <div
+        v-if="mailList!=''"
+        class="row"
+      >
         <div
-          class="mail-content col-md-12 mt-3 p-0 ml-2"
           v-for="(item, index) in mailList"
           :key="index"
+          class="mail-content col-md-12 mt-3 p-0 ml-2"
         >
           <div class="mail-number text-right p-0">
-            <span class="thumb_up" v-if="$store.state.profile.id == item.sender.id">S</span>
-            <span class="thumb_down" v-else>R</span>
+            <span
+              v-if="$store.state.profile.id == item.sender.id"
+              class="thumb_up"
+            >
+              S
+            </span>
+            <span
+              v-else
+              class="thumb_down"
+            >
+              R
+            </span>
           </div>
           <div class="mail-main pl-2">
             <div class="mail-category">
               <router-link
                 :to="'/mailbox/'+index"
-              >【 {{item.categoryType}} 】【 {{item.category.name}} 】</router-link>
+              >
+                【 {{ item.categoryType }} 】【 {{ item.category.name }} 】
+              </router-link>
             </div>
             <div class="mail-title">
-              <router-link :to="'/mailbox/'+index">{{item.title}}</router-link>
+              <router-link :to="'/mailbox/'+index">
+                {{ item.title }}
+              </router-link>
             </div>
             <div class="mail-info pr-2">
-              <a :href="item.sender.url" target="_blank">{{item.sender.name}}</a>
-              <p class="date m-0">{{item.time | moment("MM/DD") }}</p>
+              <a
+                :href="item.sender.url"
+                target="_blank"
+              >
+                {{ item.sender.name }}
+              </a>
+              <p class="date m-0">
+                {{ item.time | moment("MM/DD") }}
+              </p>
             </div>
           </div>
         </div>
@@ -32,12 +56,20 @@
 </template>
 <script>
 export default {
-  name: "mailbox",
+  name: "Mailbox",
   data() {
     return {
       mailList: "",
       keyword: ""
     };
+  },
+  mounted() {
+    // this.$bus.$emit("active", {
+    //   url: "/mailbox",
+    //   name: "個人信箱"
+    // });
+    this.$emit("handle", { url: "/mailbox", name: "個人信箱" });
+    this.getMail();
   },
   methods: {
     getMail() {
@@ -50,14 +82,6 @@ export default {
           vm.mailList = snapshot.val();
         });
     }
-  },
-  mounted() {
-    // this.$bus.$emit("active", {
-    //   url: "/mailbox",
-    //   name: "個人信箱"
-    // });
-    this.$emit("handle", { url: "/mailbox", name: "個人信箱" });
-    this.getMail();
   }
 };
 </script>
