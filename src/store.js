@@ -12,29 +12,30 @@ export default new Vuex.Store({
     profile: ''
   },
   mutations: {
-    SET_TOKEN (state, token) {
+    SET_TOKEN(state, token) {
       state.token = token
     },
-    SET_PROFILE (state, profile) {
+    SET_PROFILE(state, profile) {
       firebase
         .database()
-        .ref(`test/users/${profile.id}`)
+        .ref(`${process.env.NODE_ENV}/users/${profile.id}`)
         .once('value')
         .then((snapshot) => {
           if (snapshot.val() == null) {
             state.profile = profile
             firebase
               .database()
-              .ref(`test/users/${profile.id}`)
+              .ref(`${process.env.NODE_ENV}/users/${profile.id}`)
               .set(profile)
           } else {
+            console.log(snapshot.val())
             state.profile = snapshot.val()
           }
         })
     }
   },
   actions: {
-    getProfile ({ commit }) {
+    getProfile({ commit }) {
       axios.get('https://api.kkbox.com/v1.1/me', {
         headers: {
           Authorization: `Bearer ${this.state.token}`

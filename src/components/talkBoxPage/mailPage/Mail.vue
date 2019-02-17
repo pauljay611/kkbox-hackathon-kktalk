@@ -187,7 +187,9 @@ export default {
     sendComment() {
       this.$firebase
         .database()
-        .ref("test/mails/" + this.$route.params.id + "/comment")
+        .ref(
+          `${process.env.NODE_ENV}/mails/` + this.$route.params.id + "/comment"
+        )
         .push({
           type: this.commentType,
           content: this.comment,
@@ -201,7 +203,7 @@ export default {
       this.$firebase
         .database()
         .ref(
-          "test/users/" +
+          `${process.env.NODE_ENV}/users/` +
             this.$store.state.profile.id +
             "/mailbox/" +
             this.$route.params.id

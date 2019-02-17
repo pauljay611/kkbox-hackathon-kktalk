@@ -131,7 +131,7 @@ export default {
       this.$firebase
         .database()
         .ref(
-          "test/users/" +
+          `${process.env.NODE_ENV}/users/` +
             this.$store.state.profile.id +
             "/mailbox/" +
             this.$route.params.id
@@ -147,7 +147,9 @@ export default {
       if (vm.recipient.title.indexOf("RE") >= 0) reString = "";
       this.$firebase
         .database()
-        .ref("test/users/" + vm.recipient.sender.id + "/mailbox")
+        .ref(
+          `${process.env.NODE_ENV}/users/` + vm.recipient.sender.id + "/mailbox"
+        )
         .push({
           title: reString + vm.recipient.title,
           content: vm.content,
@@ -158,7 +160,11 @@ export default {
         });
       this.$firebase
         .database()
-        .ref("test/users/" + vm.$store.state.profile.id + "/mailbox")
+        .ref(
+          `${process.env.NODE_ENV}/users/` +
+            vm.$store.state.profile.id +
+            "/mailbox"
+        )
         .push({
           title: reString + vm.recipient.title,
           content: vm.content,

@@ -18,7 +18,10 @@
             </div>
           </div>
           <div class="block m-2">
-            <div class="block-btn">
+            <div
+              v-if=" $store.state.profile.id != undefined"
+              class="block-btn"
+            >
               <router-link :to="'/profile/'+$store.state.profile.id">
                 個人文章
               </router-link>
@@ -40,15 +43,13 @@
 export default {
   name: "Login",
   data() {
-    return {
-      
-    };
+    return {};
   },
   created() {
     this.init();
   },
   mounted() {
-    this.$emit("handle","");
+    this.$emit("handle", "");
     window.onbeforeunload = function(event) {
       event.preventDefault();
       event.returnValue = "Write something clever here..";

@@ -42,9 +42,7 @@
               >{{commentCount(item.comment).number}}</div>-->
               <div class="articles-main pl-2">
                 <div class="articles-category">
-                  <router-link
-                    :to="'/articles/'+item.id"
-                  >
+                  <router-link :to="'/articles/'+item.id">
                     【 {{ item.categoryType }} 】【 {{ item.category.name }} 】
                   </router-link>
                 </div>
@@ -81,12 +79,12 @@ export default {
       articlesList: []
     };
   },
-  mounted() {
+  created() {
     // this.$bus.$emit("active", {
     //   url: "/profile/"+this.$route.params.id,
     //   name: "個人文章"
     // });
-    this.$emit("handle",{url:this.$route.path,name:"個人文章"})
+    this.$emit("handle", { url: this.$route.path, name: "個人文章" });
     this.getProfile();
     this.getArticles();
   },
@@ -95,7 +93,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("test/users/" + this.$route.params.id)
+        .ref(`${process.env.NODE_ENV}/users/` + this.$route.params.id)
         .once("value")
         .then(function(snapshot) {
           vm.user = snapshot.val();
@@ -106,7 +104,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("test/articles")
+        .ref(`${process.env.NODE_ENV}/articles`)
         .once("value")
         .then(function(snapshot) {
           let articles = snapshot.val();
@@ -116,9 +114,7 @@ export default {
               vm.articlesList.push(articles[item]);
             }
           }
-          
         });
-        
     }
   }
 };

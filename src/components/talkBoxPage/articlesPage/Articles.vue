@@ -26,9 +26,7 @@
           </div>
           <div class="articles-main pl-2">
             <div class="articles-category">
-              <router-link
-                :to="'/articles/'+item.id"
-              >
+              <router-link :to="'/articles/'+item.id">
                 【 {{ item.categoryType }} 】【 {{ item.category.name }} 】
               </router-link>
             </div>
@@ -74,10 +72,10 @@ export default {
     //   url: "/articles",
     //   name: "所有文章"
     // });
-    this.$emit("handle",{url:'/articles',name:"所有文章"});
+    this.$emit("handle", { url: "/articles", name: "所有文章" });
     this.$firebase
       .database()
-      .ref("test/articles")
+      .ref(`${process.env.NODE_ENV}/articles`)
       .once("value")
       .then(function(snapshot) {
         let articles = snapshot.val();
@@ -119,7 +117,7 @@ export default {
       vm.articlesList = [];
       this.$firebase
         .database()
-        .ref("test/articles")
+        .ref(`${process.env.NODE_ENV}/articles`)
         .once("value")
         .then(function(snapshot) {
           let articles = snapshot.val();

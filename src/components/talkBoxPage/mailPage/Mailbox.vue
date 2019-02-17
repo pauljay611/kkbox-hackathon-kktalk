@@ -26,9 +26,7 @@
           </div>
           <div class="mail-main pl-2">
             <div class="mail-category">
-              <router-link
-                :to="'/mailbox/'+index"
-              >
+              <router-link :to="'/mailbox/'+index">
                 【 {{ item.categoryType }} 】【 {{ item.category.name }} 】
               </router-link>
             </div>
@@ -76,7 +74,11 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("test/users/" + this.$store.state.profile.id + "/mailbox")
+        .ref(
+          `${process.env.NODE_ENV}/users/` +
+            this.$store.state.profile.id +
+            "/mailbox"
+        )
         .once("value")
         .then(function(snapshot) {
           vm.mailList = snapshot.val();

@@ -12,88 +12,88 @@
             分類
           </p>
           <input
-v-model="keyword"
-                 class="border rounded pl-3"
-                 type="text"
-                 placeholder="搜尋想討論的歌曲、專輯、歌手"
-                 :disabled="disabled"
-                 @keyup.enter="search"
->
+            v-model="keyword"
+            class="border rounded pl-3"
+            type="text"
+            placeholder="搜尋想討論的歌曲、專輯、歌手"
+            :disabled="disabled"
+            @keyup.enter="search"
+          >
         </div>
         <div
-v-if="searchList.length > 0"
-             class="searchList col-md-12 mt-3"
->
+          v-if="searchList.length > 0"
+          class="searchList col-md-12 mt-3"
+        >
           <p>歌手</p>
           <ul
-v-if="searchList[0].artists.data!=undefined"
-              class="p-0"
->
+            v-if="searchList[0].artists.data!=undefined"
+            class="p-0"
+          >
             <li
-v-for="(item,index) in searchList[0].artists.data"
-                :key="index"
-                class="pl-3 mt-1"
-                @click="chooseCategory(item, '歌手')"
->
+              v-for="(item,index) in searchList[0].artists.data"
+              :key="index"
+              class="pl-3 mt-1"
+              @click="chooseCategory(item, '歌手')"
+            >
               【{{ item.name }}】
             </li>
           </ul>
           <p>歌曲</p>
           <ul
-v-if="searchList[0].tracks.data!=undefined"
-              class="p-0"
->
+            v-if="searchList[0].tracks.data!=undefined"
+            class="p-0"
+          >
             <li
-v-for="(item,index) in searchList[0].tracks.data"
-                :key="index"
-                class="pl-3 mt-1"
-                @click="chooseCategory(item, '歌曲')"
->
+              v-for="(item,index) in searchList[0].tracks.data"
+              :key="index"
+              class="pl-3 mt-1"
+              @click="chooseCategory(item, '歌曲')"
+            >
               【{{ item.name }}】【{{ item.album.artist.name }}】
             </li>
           </ul>
           <p>專輯</p>
           <ul
-v-if="searchList[0].albums.data!=undefined"
-              class="p-0"
->
+            v-if="searchList[0].albums.data!=undefined"
+            class="p-0"
+          >
             <li
-v-for="(item,index) in searchList[0].albums.data"
-                :key="index"
-                class="pl-3 mt-1"
-                @click="chooseCategory(item, '專輯')"
->
+              v-for="(item,index) in searchList[0].albums.data"
+              :key="index"
+              class="pl-3 mt-1"
+              @click="chooseCategory(item, '專輯')"
+            >
               【{{ item.name }}】【{{ item.artist.name }}】
             </li>
           </ul>
         </div>
         <div
-v-if="disabled == 'disabled'"
-             class="post-title col-md-12 mt-3"
->
+          v-if="disabled == 'disabled'"
+          class="post-title col-md-12 mt-3"
+        >
           <p class="m-0">
             標題
           </p>
           <input
-v-model="title"
-                 class="border rounded pl-3"
-                 type="text"
-                 placeholder="輸入標題"
->
+            v-model="title"
+            class="border rounded pl-3"
+            type="text"
+            placeholder="輸入標題"
+          >
         </div>
         <div
-v-if="disabled == 'disabled'"
-             class="post-content col-md-12 mt-3"
->
+          v-if="disabled == 'disabled'"
+          class="post-content col-md-12 mt-3"
+        >
           <p class="m-0">
             內容
           </p>
           <textarea
-v-model="content"
-                    class="border rounded pl-3 content"
-                    type="text"
-                    placeholder="輸入內容"
-/>
+            v-model="content"
+            class="border rounded pl-3 content"
+            type="text"
+            placeholder="輸入內容"
+          />
         </div>
         <div
           v-if="disabled == 'disabled'"
@@ -192,7 +192,7 @@ export default {
       if (this.keyword != "" && this.title != "" && this.content != "") {
         this.$firebase
           .database()
-          .ref("test/articles")
+          .ref(`${process.env.NODE_ENV}/articles`)
           .push({
             categoryType: this.categoryType,
             author: this.$store.state.profile,

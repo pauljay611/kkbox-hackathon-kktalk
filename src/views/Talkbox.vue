@@ -2,49 +2,6 @@
   <div class="talkbox wrap">
     <div class="main container">
       <div class="row">
-        <!-- <div class="left col-md-3 p-0">
-          <div class="login mt-3" v-if="$store.state.token=='undefined'">
-            <a
-              href="javascript:void(0)"
-              class="btn btn-lg btn-login-kkbox"
-              @click="getAuth"
-            >KKBOX LOGIN</a>
-          </div>
-          <div class="profile mt-3" v-if="$store.state.profile!=''">
-            <div class="profile-photo text-center">
-              <img :src="$store.state.profile.images[0].url" alt class="img-fluid rounded">
-            </div>
-            <div class="profile-info">
-              <ul>
-                <li>
-                  <a :href="$store.state.profile.url">{{$store.state.profile.name}}</a>
-                </li>
-                <li>
-                  <span>{{$store.state.profile.description}}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="sidebar mt-3">
-            <ul class="p-0">
-              <li :class="{ 'active': linkActive.post}">
-                <router-link to="/post" class="nav-item">
-                  <span>發文</span>
-                </router-link>
-              </li>
-              <li :class="{ 'active': linkActive.article}">
-                <router-link to="/articles" class="nav-item">
-                  <span>所有文章</span>
-                </router-link>
-              </li>
-              <li :class="{ 'active': linkActive.profile}">
-                <router-link to="/profile" class="nav-item">
-                  <span>個人檔案</span>
-                </router-link>
-              </li>
-            </ul>
-          </div>
-        </div>-->
         <div class="right col-md-12 p-0">
           <div class="chatroom p-0">
             <div class="header">
@@ -57,9 +14,9 @@
                       </router-link>
                     </div>
                     <div
-v-if="title!=''"
-                         class="header-subtitle p-0"
->
+                      v-if="title!=''"
+                      class="header-subtitle p-0"
+                    >
                       <router-link :to="title.url">
                         {{ title.name }}
                       </router-link>
@@ -69,9 +26,9 @@ v-if="title!=''"
               </div>
             </div>
             <router-view
-:title="title"
-                         @handle="changeTitle"
-/>
+              :title="title"
+              @handle="changeTitle"
+            />
           </div>
         </div>
       </div>
@@ -97,17 +54,13 @@ export default {
     //   vm.linkActive = item;
     // });
   },
+  beforeDestroy: function() {
+    this.$bus.$off("active");
+  },
   methods: {
-    getAuth() {
-      window.location.href =
-        "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
-    },
     changeTitle(title) {
       this.title = title;
     }
-  },
-  beforeDestroy: function() {
-    this.$bus.$off("active");
   }
 };
 </script>

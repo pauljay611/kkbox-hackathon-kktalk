@@ -263,7 +263,7 @@ export default {
       commentContent: []
     };
   },
-  mounted() {
+  created() {
     this.getArticle();
     this.getComment();
   },
@@ -302,7 +302,11 @@ export default {
     sendComment() {
       this.$firebase
         .database()
-        .ref("test/articles/" + this.$route.params.id + "/comment")
+        .ref(
+          `${process.env.NODE_ENV}/articles/` +
+            this.$route.params.id +
+            "/comment"
+        )
         .push({
           type: this.commentType,
           content: this.comment,
@@ -315,7 +319,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("test/articles/" + this.$route.params.id)
+        .ref(`${process.env.NODE_ENV}/articles/` + this.$route.params.id)
         .once("value")
         .then(function(snapshot) {
           vm.articleContent = snapshot.val();
@@ -326,7 +330,11 @@ export default {
       vm.commentContent = [];
       this.$firebase
         .database()
-        .ref("test/articles/" + this.$route.params.id + "/comment")
+        .ref(
+          `${process.env.NODE_ENV}/articles/` +
+            this.$route.params.id +
+            "/comment"
+        )
         .once("value")
         .then(function(snapshot) {
           vm.commentContent.push(snapshot.val());
@@ -335,7 +343,7 @@ export default {
     deleteArticle() {
       this.$firebase
         .database()
-        .ref("test/articles/" + this.$route.params.id)
+        .ref(`${process.env.NODE_ENV}/articles/` + this.$route.params.id)
         .remove();
       this.$router.push("/articles");
     }

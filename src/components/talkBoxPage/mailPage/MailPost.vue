@@ -130,7 +130,7 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("test/articles/" + this.$route.params.id)
+        .ref(`${process.env.NODE_ENV}/articles/` + this.$route.params.id)
         .once("value")
         .then(function(snapshot) {
           vm.recipient = snapshot.val();
@@ -140,7 +140,9 @@ export default {
       var vm = this;
       this.$firebase
         .database()
-        .ref("test/users/" + vm.recipient.author.id + "/mailbox")
+        .ref(
+          `${process.env.NODE_ENV}/users/` + vm.recipient.author.id + "/mailbox"
+        )
         .push({
           title: vm.recipient.title,
           content: vm.content,
@@ -151,7 +153,11 @@ export default {
         });
       this.$firebase
         .database()
-        .ref("test/users/" + vm.$store.state.profile.id + "/mailbox")
+        .ref(
+          `${process.env.NODE_ENV}/users/` +
+            vm.$store.state.profile.id +
+            "/mailbox"
+        )
         .push({
           title: vm.recipient.title,
           content: vm.content,

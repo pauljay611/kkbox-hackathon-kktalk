@@ -6,32 +6,32 @@
           <div class="logo">
             <div class="loginLogo d-flex align-items-center justify-content-center">
               <img
-src="http://fakeimg.pl/100x100/"
-                   class="img-fluid rounded"
-                   alt="Responsive image"
->
+                src="http://fakeimg.pl/100x100/"
+                class="img-fluid rounded"
+                alt="Responsive image"
+              >
             </div>
           </div>
           <div class="form">
             <div class="inputBlock">
               <input
-type="text"
-                     placeholder="account"
->
+                type="text"
+                placeholder="account"
+              >
             </div>
             <div class="inputBlock">
               <input
-type="text"
-                     placeholder="password"
->
+                type="text"
+                placeholder="password"
+              >
             </div>
           </div>
           <div class="loginBottom">
             <a
-href="javascript:void(0)"
-               class="btn btn-lg btn-login-normal"
-               @click="getAuth"
->
+              href="javascript:void(0)"
+              class="btn btn-lg btn-login-normal"
+              @click="getAuth"
+            >
               LOGIN
             </a>
           </div>
@@ -42,10 +42,10 @@ href="javascript:void(0)"
           </div>
           <div class="loginBottom">
             <a
-href="javascript:void(0)"
-               class="btn btn-lg btn-login-kkbox"
-               @click="getAuth"
->
+              href="javascript:void(0)"
+              class="btn btn-lg btn-login-kkbox"
+              @click="getAuth"
+            >
               KKBOX LOGIN
             </a>
           </div>
@@ -97,8 +97,9 @@ export default {
         .then(() => {});
     },
     getAuth() {
-      window.location.href =
-        "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
+      window.location.href = `https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=${
+        process.env.VUE_APP_TOKEN_ID
+      }&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect`;
     }
   }
 };

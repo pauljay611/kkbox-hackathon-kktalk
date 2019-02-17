@@ -18,14 +18,6 @@ export default {
     this.oauthRedirect();
   },
   methods: {
-    // oauthRedirect(){
-    //   this.$axios.get("http://localhost:3000/redirect"+location.search).then(response => {
-    //     console.log(response.data.access_token)
-    //     this.$store.commit('SET_TOKEN', response.data.access_token)
-    //     this.data = response.data;
-    //     router.push('/')
-    // });
-    // }
     oauthRedirect() {
       this.$axios.defaults.headers.post["Content-Type"] =
         "application/x-www-form-urlencoded";
@@ -45,9 +37,9 @@ export default {
         .post(
           "/token",
           {
-            client_id: "6a87d0847e4de3e6fc3f51a79bfc93c6",
+            client_id: process.env.VUE_APP_TOKEN_ID,
             grant_type: "authorization_code",
-            client_secret: "2151c7c702c1c3c42aedb85a172b254b",
+            client_secret: process.env.VUE_APP_TOKEN_SECRET,
             code: this.$route.query.code
           },
           {

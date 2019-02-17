@@ -30,11 +30,13 @@ export default {
   },
   mounted() {
     this.$bus.$emit("active", "");
+    console.log(process.env);
   },
   methods: {
     getAuth() {
-      window.location.href =
-        "https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=6a87d0847e4de3e6fc3f51a79bfc93c6&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect";
+      window.location.href = `https://account.kkbox.com/oauth2/authorize?response_type=code&client_id=${
+        process.env.VUE_APP_TOKEN_ID
+      }&state=123&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fredirect`;
     }
   }
 };
